@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="OneMusic.BusinessLayer/OneMusic.BusinessLayer.csproj" />
+  <Project Path="OneMusic.DataAccessLayer/OneMusic.DataAccessLayer.csproj" />
+  <Project Path="OneMusic.EntityLayer/OneMusic.EntityLayer.csproj" />
+  <Project Path="OneMusic.WebUI/OneMusic.WebUI.csproj" />
+</Solution>
