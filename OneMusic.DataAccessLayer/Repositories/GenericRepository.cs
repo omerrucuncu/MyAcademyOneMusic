@@ -17,27 +17,33 @@ namespace OneMusic.DataAccessLayer.Repositories
         }
         public void Delete(int id) // Delete operation in CRUD operations 
         {
-            throw new NotImplementedException(); 
+            var entity = _context.Set<T>().Find(id); // Find the entity with the specified ID
+            if (entity != null) // If the entity exists
+            {
+                _context.Remove(entity); // Remove the entity from the database context
+                _context.SaveChanges(); // Save changes to the database
+            }
         }
 
         public List<T> GetAll() // Read operation in CRUD operations
         {
-            throw new NotImplementedException();
+            return _context.Set<T>().ToList(); // Retrieve all entities of type T from the database
         }
 
         public T GetById(int id) // Get a single entity by its ID
         {
-            throw new NotImplementedException();
+            return _context.Set<T>().Find(id); // Find and return the entity with the specified ID
         }
 
         public void Insert(T entity) // Create operation in CRUD operations
         {
-            throw new NotImplementedException();
+            _context.Add(entity); // Add the new entity to the database context
+            _context.SaveChanges(); // Save changes to the database
         }
 
         public void Update(T entity) // Update operation in CRUD operations
         {
-            throw new NotImplementedException();
+            _context.Update(entity); // Update the existing entity in the database context
         }
     }
 }

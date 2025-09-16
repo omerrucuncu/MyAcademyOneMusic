@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace OneMusic.DataAccessLayer.Abstract
 {
-    public interface IAboutDal : IGenericDal<About> // Interface for data access layer specific to About entity
+    public interface IAlbumDal : IGenericDal<Album> // Interface for data access layer specific to Album entity
     {
-
     }
 }
