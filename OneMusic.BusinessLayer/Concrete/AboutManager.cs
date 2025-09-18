@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OneMusic.BusinessLayer.Concrete
+namespace OneMusic.BusinessLayer.Concrete 
 {
-    public class AboutManager : IAboutService
+    public class AboutManager : IAboutService // Service class for managing About entities, implementing the IAboutService interface 
     {
         private readonly IAboutDal _aboutDal; // Data access layer for About entity 
 
@@ -18,17 +18,17 @@ namespace OneMusic.BusinessLayer.Concrete
             _aboutDal = aboutDal; // Assign the injected data access layer to the private field 
         }
 
-        public void TDelete(int id)
+        public void TDelete(int id) // Delete operation in CRUD operations
         {
             _aboutDal.Delete(id); // Call the Delete method of the data access layer to remove an About entity by its ID
         }
 
-        public List<About> TGetAll()
+        public List<About> TGetAll() // Read operation in CRUD operations
         {
             return _aboutDal.GetAll(); // Call the GetAll method of the data access layer to retrieve all About entities
         }
 
-        public About TGetById(int id)
+        public About TGetById(int id) // Get a single entity by its ID
         {
             return _aboutDal.GetById(id); // Call the GetById method of the data access layer to retrieve an About entity by its ID
         }
