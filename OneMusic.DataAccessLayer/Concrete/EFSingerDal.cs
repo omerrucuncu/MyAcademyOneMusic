@@ -16,6 +16,6 @@ namespace OneMusic.DataAccessLayer.Concrete
         { 
         }
     }
-    {
+    
     }
-}
+
