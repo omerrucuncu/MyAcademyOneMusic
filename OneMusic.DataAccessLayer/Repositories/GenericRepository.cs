@@ -13,7 +13,7 @@ namespace OneMusic.DataAccessLayer.Repositories
         private readonly OneMusicContext _context; // Database context for data access 
         public GenericRepository(OneMusicContext context) // Constructor to initialize the database context 
         {
-            _context = context;
+            _context = context; // Assign the provided context to the private field 
         }
         public void Delete(int id) // Delete operation in CRUD operations 
         {
