@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OneMusic.BusinessLayer.Abstract;
+using OneMusic.EntityLayer.Entities;
 
 namespace OneMusic.WebUI.Controllers
 {
@@ -16,6 +17,52 @@ namespace OneMusic.WebUI.Controllers
         {
             var abouts = _aboutService.TGetAll(); // Retrieve all about entries using the service
             return View(abouts); // Pass the retrieved entries to the view for display
+        }
+
+        public IActionResult DeleteAbout(int id)
+        {
+            _aboutService.TDelete(id); // Delete the about entry with the specified ID using the service
+            return RedirectToAction("Index"); // Redirect to the Index action to refresh the list of about entries
+        }
+
+        [HttpGet]
+        public IActionResult CreateAbout() // Render the form for creating a new about entry 
+        {
+            return View(); // Render the view for creating a new about entry
+        }
+
+        [HttpPost]
+        public IActionResult CreateAbout(About about)  // Handle the form submission for creating a new about entry 
+        {
+            if (ModelState.IsValid) // Check if the model state is valid
+            {
+                _aboutService.TInsert(about); // Insert the new about entry using the service
+                return RedirectToAction("Index", "AdminAbout"); // Redirect to the Index action to show the updated list
+            }
+            return View(about); // If the model state is invalid, return to the view with the current about data
+        }
+
+
+        [HttpGet]
+        public IActionResult UpdateAbout(int id)
+        {
+            var about = _aboutService.TGetById(id); // Retrieve the about entry with the specified ID using the service
+            if (about == null) // Check if the about entry exists
+            {
+                return NotFound(); // Return a 404 Not Found response if the entry does not exist
+            }
+            return View(about); // Pass the retrieved entry to the view for editing
+        }
+
+        [HttpPost]
+        public IActionResult UpdateAbout(About about)
+        {
+
+
+            _aboutService.TUpdate(about); // Update the about entry using the service
+            return RedirectToAction("Index", "AdminAbout"); // Redirect to the Index action to show the updated list
+
+
         }
     }
 }
