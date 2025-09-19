@@ -44,25 +44,25 @@ namespace OneMusic.WebUI.Controllers
 
 
         [HttpGet]
-        public IActionResult UpdateAbout(int id)
+        public IActionResult UpdateAbout(int id) // Render the form for editing an existing about entry
         {
             var about = _aboutService.TGetById(id); // Retrieve the about entry with the specified ID using the service
-            if (about == null) // Check if the about entry exists
+            if (about == null) // If the about entry does not exist
             {
-                return NotFound(); // Return a 404 Not Found response if the entry does not exist
+                return NotFound(); // Return a 404 Not Found response
             }
-            return View(about); // Pass the retrieved entry to the view for editing
+            return View(about); // Pass the retrieved about entry to the view for editing
         }
 
         [HttpPost]
-        public IActionResult UpdateAbout(About about)
+        public IActionResult UpdateAbout(About about) // Handle the form submission for updating an existing about entry 
         {
-
-
-            _aboutService.TUpdate(about); // Update the about entry using the service
-            return RedirectToAction("Index", "AdminAbout"); // Redirect to the Index action to show the updated list
-
-
+            if (ModelState.IsValid) // Check if the model state is valid
+            {
+                _aboutService.TUpdate(about); // Update the about entry using the service
+                return RedirectToAction("Index", "AdminAbout"); // Redirect to the Index action to show the updated list
+            }
+            return View(about); // If the model state is invalid, return to the view with the current about data
         }
     }
 }

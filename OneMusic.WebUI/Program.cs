@@ -30,6 +30,7 @@ builder.Services.AddScoped<IAlbumDal, EFAlbumDal>(); // Register EFAlbumDal as t
 builder.Services.AddScoped<IAlbumService, AlbumManager>(); // Register AlbumManager as the implementation for IAlbumService with scoped lifetime
 
 builder.Services.AddDbContext<OneMusicContext>(); // Register OneMusicContext for Entity Framework Core with scoped lifetime 
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

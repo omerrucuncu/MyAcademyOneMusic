@@ -44,6 +44,8 @@ namespace OneMusic.DataAccessLayer.Repositories
         public void Update(T entity) // Update operation in CRUD operations
         {
             _context.Update(entity); // Update the existing entity in the database context
+            _context.SaveChanges(); // Save changes to the database
+
         }
     }
 }

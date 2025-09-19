@@ -3,20 +3,49 @@
 	ViewData["Title"] = "UpdateAbout";
 	Layout = "~/Views/AdminLayout/Index.cshtml";
 }
+
+@* Plan (pseudocode):
+   - Ensure form posts to the correct controller/action explicitly using tag helpers.
+   - Include antiforgery token to match [ValidateAntiForgeryToken] on POST action (if used).
+   - Keep AboutId in a hidden field so the model binder can attach the entity for update.
+   - Add simple validation feedback.
+   - Remove invalid type attribute from textarea.
+*@
+
 <br />
 <h3>Update About</h3>
 <br />
 
-<form method="post">
-	<input type="hidden" asp-for="AboutId" />
-	<label>Image URL</label>
-	<input type="text" asp-for="ImageUrl" class="form-control" />
-	<br />
-	<label>Title</label>
-	<input type="text" asp-for="Title" class="form-control" />
-	<br />
-	<label>Description</label>
-	<textarea asp-for="Description" class="form-control" rows="4"></textarea>
-	<br />
-	<button class="btn btn-primary"> Update </button>
+<form asp-action="UpdateAbout" asp-controller="AdminAbout" method="post">
+    @Html.AntiForgeryToken()
+
+	<input type="hidden" asp-for="AboutId" /> @* Hidden field for AboutId *@
+    
+    <div class="mb-3">
+		<label asp-for="ImageUrl" class="form-label"></label> @* Label for ImageUrl *@
+		<input asp-for="ImageUrl" class="form-control" /> @* Input for ImageUrl *@
+		<span asp-validation-for="ImageUrl" class="text-danger"></span> @* Validation message for ImageUrl *@
+    </div>
+
+    <div class="mb-3">
+		<label asp-for="Title" class="form-label"></label> @* Label for Title *@
+		<input asp-for="Title" class="form-control" /> @* Input for Title *@
+		<span asp-validation-for="Title" class="text-danger"></span> @* Validation message for Title *@
+    </div>
+
+    <div class="mb-3">
+		<label asp-for="Description" class="form-label"></label> @* Label for Description *@
+		<textarea asp-for="Description" class="form-control" rows="4"></textarea> @* Textarea for Description *@
+		<span asp-validation-for="Description" class="text-danger"></span> @* Validation message for Description *@
+    </div>
+
+    <div class="mb-3">
+		<button type="submit" class="btn btn-primary">Update</button> @* Submit button *@
+    </div>
+
+	<div asp-validation-summary="ModelOnly" class="text-danger"></div> @* Summary of validation errors *@
 </form>
+
+@* @section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+} *@
